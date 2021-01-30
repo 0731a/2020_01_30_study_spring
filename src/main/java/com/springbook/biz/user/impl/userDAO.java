@@ -3,7 +3,11 @@ package com.springbook.biz.user.impl;
 import java.sql.*;
 import com.springbook.biz.common.*;
 import com.springbook.biz.user.UserVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+@Repository("userDAO")
 public class UserDAO {
 	// JDBC 관련 변수 	
 	private Connection conn = null;
