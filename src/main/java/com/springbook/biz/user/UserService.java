@@ -1,6 +1,4 @@
-package com.springbook.biz.user.impl;
-
-import com.springbook.biz.user.UserVO;
+package com.springbook.biz.user;
 
 public interface UserService {
 
