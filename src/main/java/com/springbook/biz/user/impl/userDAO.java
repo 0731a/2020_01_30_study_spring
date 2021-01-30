@@ -4,7 +4,7 @@ import java.sql.*;
 import com.springbook.biz.common.*;
 import com.springbook.biz.user.UserVO;
 
-public class userDAO {
+public class UserDAO {
 	// JDBC 관련 변수 	
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
