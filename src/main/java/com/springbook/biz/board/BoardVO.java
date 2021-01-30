@@ -1,4 +1,4 @@
-package com.springbook.biz;
+package com.springbook.biz.board;
 
 import java.sql.Date;
 
