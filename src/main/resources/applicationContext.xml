@@ -10,7 +10,7 @@
 
 	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
 	
-	<bean id="log" class="com.springbook.biz.common.LogAdviceByAnnotation1"></bean>
+	<bean id="log" class="com.springbook.biz.common.AOP.LogAdviceByAnnotation1"></bean>
 	
 	<!--
 	<bean id="userService" class="com.springbook.biz.user.impl.UserServiceImpl">
