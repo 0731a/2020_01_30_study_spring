@@ -37,14 +37,19 @@
 	<!--  DATA SOURCE 관련 설정 -->
 	
 	<!-- JdbcTemplate 가 사용할 data source, 스프링 컨테이너가 생성 -->
-	<!-- DataSource 인터페이스를 구현한 클래스는 다양하지만 일반적으로 가장 많이 사용하는 Apach의 BasicDataSource 사용  -->
+	<!-- DataSource 인터페이스를 구현한 클래스는 다양하지만 일반적으로 가장 많이 사용하는 Apache의 BasicDataSource 사용  -->
 	
-	<!--  1. 프로퍼티를 이용한 DataSource 설정  -->
+	<!--  properties 파일 내에 설정을 기입하고 불러오기 위함, 굳이 외부 파일을 이용하지 않고 value에 string으로 바로 대입 가능 -->
+	<context:property-placeholder location="classpath:config/database.properties" />
+
 	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:tcp://localhost/~/test" />
-		<property name="username" value="test" />
-		<property name="password" value="1234" />
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
+	
+	
+	
 
 </beans>
