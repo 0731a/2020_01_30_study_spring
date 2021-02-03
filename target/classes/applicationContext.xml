@@ -10,8 +10,6 @@
 
 	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
 	
-	
-	
 	<!--
 	<bean id="userService" class="com.springbook.biz.user.impl.UserServiceImpl">
 	 	<property name="userDAO" ref="userDAO" />
@@ -20,6 +18,9 @@
 	<bean id="userDAO" class="com.springbook.biz.user.impl.UserDAO"/>
 	 -->
 	 
+	 
+	 
+	 <!--  AOP 관련 설정  -->
 	 <aop:aspectj-autoproxy></aop:aspectj-autoproxy> <!-- annotation을 통한 AOP 설정을 위한 자동 스캔 -->
 	 
 	 <bean id="log" class="com.springbook.biz.common.AOP.LogAdviceByBean"></bean>
@@ -31,5 +32,19 @@
 			<aop:before pointcut-ref="getPointcut" method="printLog" />
 		</aop:aspect>
 	</aop:config>
+	
+	
+	<!--  DATA SOURCE 관련 설정 -->
+	
+	<!-- JdbcTemplate 가 사용할 data source, 스프링 컨테이너가 생성 -->
+	<!-- DataSource 인터페이스를 구현한 클래스는 다양하지만 일반적으로 가장 많이 사용하는 Apach의 BasicDataSource 사용  -->
+	
+	<!--  1. 프로퍼티를 이용한 DataSource 설정  -->
+	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:tcp://localhost/~/test" />
+		<property name="username" value="test" />
+		<property name="password" value="1234" />
+	</bean>
 
 </beans>
