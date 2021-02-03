@@ -10,15 +10,7 @@
 
 	<context:component-scan base-package="com.springbook.biz"></context:component-scan>
 	
-	<bean id="log" class="com.springbook.biz.common.LogAdvice"></bean>
-	
-	<aop:config>
-		<aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))" />
-		
-		<aop:aspect ref="log">
-			<aop:before pointcut-ref="allPointcut" method="printLog" />
-		</aop:aspect>
-	</aop:config>
+	<bean id="log" class="com.springbook.biz.common.LogAdviceByAnnotation1"></bean>
 	
 	<!--
 	<bean id="userService" class="com.springbook.biz.user.impl.UserServiceImpl">
@@ -27,5 +19,18 @@
 	
 	<bean id="userDAO" class="com.springbook.biz.user.impl.UserDAO"/>
 	 -->
+	 
+	 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	 
+	 <!-- aop xml을 통한 수동 관리 
+	 <aop:config>
+		<aop:pointcut id="allPointcut" expression="execution(* com.springbook.biz..*Impl.*(..))" />
+		<aop:pointcut id="getPointcut" expression="execution(* com.springbook.biz..*Impl.get*(..))" />
+		
+		<aop:aspect ref="log">
+			<aop:before pointcut-ref="getPointcut" method="printLog" />
+		</aop:aspect>
+	</aop:config>
+	-->
 
 </beans>
