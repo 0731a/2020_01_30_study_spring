@@ -2,22 +2,24 @@ package com.springbook.biz.board.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardVO;
-import com.springbook.biz.common.JDBCUtil;
 
-// Spring JDBC 기반 , JdbcDaoSupport를 상속하여 getJbcTemplate()를 통해 JdbcTemplate 객체를 이용하는 방법 
-@Repository("boardDAOByJdbcTemplate1")
-public class BoardDAOByJdbcTemplate1 extends JdbcDaoSupport {
+// Spring JDBC 기반, JdbcTemplate 클래스를 <bean>에 등록하여 의존성 주입 하는 방법 
+@Repository("boardDAOByJdbcTemplate2")
+public class BoardDAOByJdbcTemplate2 {
+	// jdbcTemplate 클래스를 bean을 통하여 획득 
+	// jdbcTemplate1과의 차이점, 일반적으로 이렇게 처리 함 
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+		
 	// SQL 명령어들 
 	private final String BOARD_INSERT = "insert into board(seq, title, writer, content) values((select nvl(max(seq), 0)+1 from board),?,?,?)";
 	private final String BOARD_UPDATE = "update board set title=? content=? where seq=?";
@@ -25,46 +27,42 @@ public class BoardDAOByJdbcTemplate1 extends JdbcDaoSupport {
 	private final String BOARD_GET = "select * from board where seq=?";
 	private final String BOARD_LIST = "select * from board order by seq desc";
 	
-	@Autowired
-	public void setSupterDataSource(DataSource dataSource) {
-		super.setDataSource(dataSource);
-	}
 	
 	// CRUD 기능의 메소드 구현
 	// 글 등록 
 	public void insertBoard(BoardVO vo) {
-		System.out.println("===> Spring JDBC로 insertBoard() 기능 처리");
-		getJdbcTemplate().update(BOARD_INSERT,vo.getTitle(),vo.getWriter(),vo.getContent());
+		System.out.println("===> Spring JDBC2로 insertBoard() 기능 처리");
+		jdbcTemplate.update(BOARD_INSERT,vo.getTitle(),vo.getWriter(),vo.getContent());
 	}
 		
 	// 글 수정
 	public void updateBoard(BoardVO vo) {
-		System.out.println("===> Spring JDBC로 updateBoard() 기능 처리");
-		getJdbcTemplate().update(BOARD_UPDATE,vo.getTitle(),vo.getContent(),vo.getSeq());
+		System.out.println("===> Spring JDBC2로 updateBoard() 기능 처리");
+		jdbcTemplate.update(BOARD_UPDATE,vo.getTitle(),vo.getContent(),vo.getSeq());
 	}
 		
 	// 글 삭제
 	public void deleteBoard(BoardVO vo) {
-		System.out.println("===> Spring JDBC로 deleteBoard() 기능 처리");
-		getJdbcTemplate().update(BOARD_DELETE, vo.getSeq());
+		System.out.println("===> Spring JDBC2로 deleteBoard() 기능 처리");
+		jdbcTemplate.update(BOARD_DELETE, vo.getSeq());
 	}
 		
 	// 글 상세 조회 
 	public BoardVO getBoard(BoardVO vo) {
-		System.out.println("===> Spring JDBC로 getBoard() 기능 처리");
+		System.out.println("===> Spring JDBC2로 getBoard() 기능 처리");
 		Object[] args = {vo.getSeq()};
-		return getJdbcTemplate().queryForObject(BOARD_GET, args, new BoardRowMapper());
+		return jdbcTemplate.queryForObject(BOARD_GET, args, new BoardRowMapper2());
 			
 	}
 		
 	// 글 목록 조회
 	public List<BoardVO> getBoardList(BoardVO vo) {
-		System.out.println("===> Spring JDBC로 getBoardList() 기능 처리");
-		return getJdbcTemplate().query(BOARD_LIST, new BoardRowMapper());	
+		System.out.println("===> Spring JDBC2로 getBoardList() 기능 처리");
+		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper2());	
 	}
 }
 
-class BoardRowMapper implements RowMapper<BoardVO>{
+class BoardRowMapper2 implements RowMapper<BoardVO>{
 	public BoardVO mapRow(ResultSet rs,int rowNum) throws SQLException {
 		BoardVO board = new BoardVO();
 		board.setSeq(rs.getInt("SEQ"));

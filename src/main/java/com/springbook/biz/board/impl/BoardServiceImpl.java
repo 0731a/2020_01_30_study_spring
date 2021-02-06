@@ -11,7 +11,7 @@ import com.springbook.biz.board.BoardVO;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	@Autowired
-	private BoardDAOByJdbcTemplate1 boardDAO;
+	private BoardDAOByJdbcTemplate2 boardDAO;
 
 	// ±Û µî·Ï 
 	public void insertBoard(BoardVO vo) {
