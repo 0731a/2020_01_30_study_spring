@@ -56,6 +56,13 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
+	<!--  Transaction 설정   -->
+	<!--  DataSourceTransaction 매니저 (JDBC)= PlatformTransactionManager의 메소드 overriding   -->
+	<!--  Spring이 제공하는 모든 트랜잭션 관리자는 PlatformTransactionManager을 구현    -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" ></property>
+	</bean>
+	
 	
 
 </beans>
