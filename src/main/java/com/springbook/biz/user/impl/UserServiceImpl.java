@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
 	
 	//회원 등록
 	public UserVO getUSer(UserVO vo) {
-		return userDAO.getUSer(vo);
+		return userDAO.getUser(vo);
 	}
 
 }

@@ -1,6 +1,6 @@
 <%@page import="com.springbook.biz.user.impl.UserDAO"%>
 <%@page import="com.springbook.biz.user.UserVO"%>
-<%@page contentType="text/html" charset="EUC-KR"%>
+<%@page contentType="text/html; charset=EUC-KR"%>
 
 <%
 	// Model 1 방식 
@@ -19,7 +19,7 @@
 	
 	// 3. 화면 네비게이션
 	if( user != null ){
-		response.sendRedirect("getBoard.jsp");
+		response.sendRedirect("getBoardList.jsp");
 	}else{
 		response.sendRedirect("login.jsp");
 	}
