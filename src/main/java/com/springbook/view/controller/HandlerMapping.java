@@ -3,6 +3,7 @@ package com.springbook.view.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.springbook.view.board.GetBoardListController;
 import com.springbook.view.user.LoginController;
 
 //  모든  Controller 객체들을 저장
@@ -14,6 +15,7 @@ public class HandlerMapping {
 	public HandlerMapping() {
 		mappings = new HashMap<String, CustomController>();
 		mappings.put("/login.do",new LoginController());
+		mappings.put("/getBoardList.do", new GetBoardListController());
 	}
 	
 	public CustomController getController(String path) {
