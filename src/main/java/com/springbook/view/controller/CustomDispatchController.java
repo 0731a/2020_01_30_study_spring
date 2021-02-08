@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.springbook.biz.user.UserVO;
+import com.springbook.biz.user.impl.UserDAO;
+
 /**
  * Servlet implementation class CustomController
  */
@@ -44,7 +47,25 @@ public class CustomDispatchController extends HttpServlet {
 		
 		// 2. 클라이언트의 요청 path에 따라 적절히 분기 처리 
 		if(path.equals("/login.do")) {
-			System.out.println("로그인 처리");
+			// 사용자가 입력한 아이디, 비밀번호를 추출하여 로그인을 처리하는 jsp
+			// 1. 사용자 입력 정보 추출
+			String id = request.getParameter("id");
+			String password = request.getParameter("password");
+			
+			// 2. DB 연동 처리 
+			UserVO vo = new UserVO();
+			vo.setId(id);
+			vo.setPassword(password);
+			
+			UserDAO userDAO = new UserDAO();
+			UserVO user = userDAO.getUser(vo);
+			
+			// 3. 화면 네비게이션
+			if( user != null ){
+				response.sendRedirect("getBoardList.jsp");
+			}else{
+				response.sendRedirect("login.jsp");
+			}
 		}else if(path.equals("/logout.do")) {
 			System.out.println("로그아웃 처리");
 		}else if(path.equals("/insertBoard.do")) {
