@@ -5,7 +5,7 @@
     <description></description>
     <display-name>CustomController</display-name>
     <servlet-name>action</servlet-name>
-    <servlet-class>com.springbook.view.controller.CustomDispatchController</servlet-class>
+    <servlet-class>com.springbook.view.controller.CustomDispatchController2</servlet-class>
   </servlet>
   
   <servlet-mapping>
