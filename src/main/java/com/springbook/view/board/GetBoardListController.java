@@ -23,6 +23,6 @@ public class GetBoardListController implements CustomController {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("boardList", boardList);
-		return "getBoardListModel2";
+		return "getBoardListModel2ByEL";
 	}
 }

@@ -26,9 +26,9 @@ public class LoginController implements CustomController {
 		
 		// 3. 화면 네비게이션
 		if( user != null ){
-			return "getBoardList.do";
+			return "getBoardList.do"; // HandlerMapping에 등록한 이름 
 		}else{
-			return "login.jsp";
+			return "login";
 		}
 	}
 
